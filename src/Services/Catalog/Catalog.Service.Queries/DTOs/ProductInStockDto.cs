@@ -1,6 +1,6 @@
 ﻿namespace Catalog.Service.Queries.DTOs;
 
-public class ProductInStockDto
+public record ProductInStockDto
 {
     public int ProductInStockId { get; set; }
     public int ProductId { get; set; }

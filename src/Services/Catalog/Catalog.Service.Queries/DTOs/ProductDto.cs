@@ -1,6 +1,6 @@
 ﻿namespace Catalog.Service.Queries.DTOs;
 
-public class ProductDto
+public record ProductDto
 {
     public int ProductId { get; set; }
     public string Name { get; set; }="";
