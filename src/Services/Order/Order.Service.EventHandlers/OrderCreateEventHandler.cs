@@ -31,7 +31,7 @@ namespace Order.Service.EventHandlers
                 logger.LogInformation("--- preparin header");
                 PrepareHeader(entry,notification);
                 logger.LogInformation("--- creating order");
-                await context.AddAsync(entry,cancellationToken);
+                await context.Orders.AddAsync(entry,cancellationToken);
                 await context.SaveChangesAsync(cancellationToken);
                 logger.LogInformation($"--- order {entry.OrderId} was created");
                 logger.LogInformation("--- updating stock");

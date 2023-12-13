@@ -59,6 +59,9 @@ namespace Order.Persistence.DataBase.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"), 1L, 1);
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -73,7 +76,20 @@ namespace Order.Persistence.DataBase.Migrations
 
                     b.HasKey("OrderDetailId");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("OrderDetails", "Order");
+                });
+
+            modelBuilder.Entity("Order.Domain.OrderDetail", b =>
+                {
+                    b.HasOne("Order.Domain.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

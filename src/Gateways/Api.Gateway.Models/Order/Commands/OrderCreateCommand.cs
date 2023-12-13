@@ -2,7 +2,7 @@
 
 namespace Api.Gateway.Models.Order.Commands;
 
-public record OrderCreateCommand 
+public class OrderCreateCommand 
 {
     public OrderStatus Status { get; set; }
     public OrderPayment PaymentType { get; set; }
@@ -11,7 +11,7 @@ public record OrderCreateCommand
     //public DateTime CreatedAt { get; set; }
     //public decimal Total { get; set; }
 }
-public record OrderCreateDetail
+public class OrderCreateDetail
 {
     public int ProductId { get; set; }
     public int Quantity { get; set; }

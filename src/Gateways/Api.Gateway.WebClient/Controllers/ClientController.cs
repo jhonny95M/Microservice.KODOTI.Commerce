@@ -1,43 +1,38 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Gateway.Models;
+using Api.Gateway.Models.Customer.DTOs;
+using Api.Gateway.Proxies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Api.Gateway.WebClient.Controllers
 {
+    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
     {
+        private readonly ICustomerProxy customerProxy;
+
+        public ClientController(ICustomerProxy customerProxy)
+        {
+            this.customerProxy = customerProxy;
+        }
+
         // GET: api/<ClientController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<DataCollection<ClientDto>?> Get(int page,int take)
         {
-            return new string[] { "value1", "value2" };
+            return await customerProxy.GetAllAsync(page, take);
         }
 
         // GET api/<ClientController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ClientDto?> Get(int id)
         {
-            return "value";
-        }
-
-        // POST api/<ClientController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ClientController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await customerProxy.GetByIdAsync(id);
         }
     }
 }

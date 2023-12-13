@@ -1,8 +1,11 @@
-﻿using Api.Gateway.Models.Order.Commands;
+﻿using Api.Gateway.Models;
+using Api.Gateway.Models.Order.Commands;
+using Api.Gateway.Models.Order.DTOs;
 using Api.Gateway.Proxies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,24 +17,48 @@ namespace Api.Gateway.WebClient.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderProxy orderProxy;
+        private readonly ICustomerProxy customerProxy;
+        private readonly ICatalogHttpProxy catalogHttpProxy;
 
-        public OrderController(IOrderProxy orderProxy)
+        public OrderController(IOrderProxy orderProxy, ICustomerProxy customerProxy, ICatalogHttpProxy catalogHttpProxy)
         {
             this.orderProxy = orderProxy;
+            this.customerProxy = customerProxy;
+            this.catalogHttpProxy = catalogHttpProxy;
         }
 
         // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<DataCollection<OrderDto>> Get(int page,int take)
         {
-            return new string[] { "value1", "value2" };
+            var result=(await orderProxy.GetAllAsync(page, take))!;
+            if (result.HasItems)
+            {
+                var clientIds=result.Items
+                    .Select(c=>c.ClientId)
+                    .GroupBy(g=>g)
+                    .Select(c=>c.Key)!;
+                var clients=await customerProxy.GetAllAsync(page, clientIds.Count(),clientIds);
+                foreach (var order in result.Items)
+                    order.Client=clients?.Items.Single(c=>c.ClientId==order.ClientId);
+            }
+            return result;
         }
 
         // GET api/<OrderController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<OrderDto> Get(int id)
         {
-            return "value";
+            var result = (await orderProxy.GetByIdAsync(id))!;
+            result.Client= await customerProxy.GetByIdAsync(result.ClientId);
+                var productIds = result.Items
+                    .Select(c => c.ProductId)
+                    .GroupBy(g => g)
+                    .Select(c => c.Key)!;
+                var products = await catalogHttpProxy.GetAllAsync(1, productIds.Count(), productIds);
+                foreach (var item in result.Items)
+                    item.Product = products?.Items.Single(c => c.ProductId == item.ProductId);
+            return result;
         }
 
         // POST api/<OrderController>
@@ -40,18 +67,6 @@ namespace Api.Gateway.WebClient.Controllers
         {
             await orderProxy.CreateAsync(command);
             return Ok();
-        }
-
-        // PUT api/<OrderController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<OrderController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

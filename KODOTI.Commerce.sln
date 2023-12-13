@@ -123,11 +123,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{2B4E662D-0FB3-40FA-BADA-49AD00DE9F22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Gateway.WebClient", "src\Gateways\Api.Gateway.WebClient\Api.Gateway.WebClient.csproj", "{7E92BD7A-13DB-4636-933D-A9AF1EBA6735}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Gateway.WebClient", "src\Gateways\Api.Gateway.WebClient\Api.Gateway.WebClient.csproj", "{7E92BD7A-13DB-4636-933D-A9AF1EBA6735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Gateway.Proxies", "src\Gateways\Api.Gateway.Proxies\Api.Gateway.Proxies.csproj", "{4F46DFA1-A7D5-4006-9EB7-FCBDFEC2FFA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Gateway.Proxies", "src\Gateways\Api.Gateway.Proxies\Api.Gateway.Proxies.csproj", "{4F46DFA1-A7D5-4006-9EB7-FCBDFEC2FFA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Gateway.Models", "src\Gateways\Api.Gateway.Models\Api.Gateway.Models.csproj", "{FF092004-3B95-4B4D-A089-8545A6C32413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Gateway.Models", "src\Gateways\Api.Gateway.Models\Api.Gateway.Models.csproj", "{FF092004-3B95-4B4D-A089-8545A6C32413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Authentication", "src\Clients\Client.Authentication\Client.Authentication.csproj", "{8C3FA48C-26A2-4686-80E9-4E8F5724A73B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.WebClient", "src\Clients\Client.WebClient\Client.WebClient.csproj", "{CA97C4FD-7340-4FBE-B37D-6A76288D8A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Gateway.WebClient.Proxy", "src\Gateways\Api.Gateway.WebClient.Proxy\Api.Gateway.WebClient.Proxy.csproj", "{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -263,6 +269,18 @@ Global
 		{FF092004-3B95-4B4D-A089-8545A6C32413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF092004-3B95-4B4D-A089-8545A6C32413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF092004-3B95-4B4D-A089-8545A6C32413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C3FA48C-26A2-4686-80E9-4E8F5724A73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C3FA48C-26A2-4686-80E9-4E8F5724A73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C3FA48C-26A2-4686-80E9-4E8F5724A73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C3FA48C-26A2-4686-80E9-4E8F5724A73B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA97C4FD-7340-4FBE-B37D-6A76288D8A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA97C4FD-7340-4FBE-B37D-6A76288D8A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA97C4FD-7340-4FBE-B37D-6A76288D8A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA97C4FD-7340-4FBE-B37D-6A76288D8A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -327,6 +345,9 @@ Global
 		{7E92BD7A-13DB-4636-933D-A9AF1EBA6735} = {2B4E662D-0FB3-40FA-BADA-49AD00DE9F22}
 		{4F46DFA1-A7D5-4006-9EB7-FCBDFEC2FFA1} = {34B9E960-C3D9-4ED6-9FF6-392A283CAED6}
 		{FF092004-3B95-4B4D-A089-8545A6C32413} = {34B9E960-C3D9-4ED6-9FF6-392A283CAED6}
+		{8C3FA48C-26A2-4686-80E9-4E8F5724A73B} = {E130ACF4-4740-43A4-A385-9ECE6B3DB376}
+		{CA97C4FD-7340-4FBE-B37D-6A76288D8A26} = {E130ACF4-4740-43A4-A385-9ECE6B3DB376}
+		{0C5572A2-EC38-45CC-9F73-E23FDF4E25DB} = {2B4E662D-0FB3-40FA-BADA-49AD00DE9F22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {25CC67C7-076F-4D84-B5AC-54A00F6CE9EA}
