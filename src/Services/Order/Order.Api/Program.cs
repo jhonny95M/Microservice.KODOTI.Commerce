@@ -2,6 +2,7 @@ using Common.Logging;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Order.Persistence.DataBase;
@@ -55,6 +56,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.Services.GetService<ApplicationDbContext>()!.Database.Migrate();
 }
 app.UseRouting();
 app.UseAuthorization();

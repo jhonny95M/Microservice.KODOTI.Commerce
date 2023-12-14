@@ -3,6 +3,7 @@ using Identity.Persistence.DataBase;
 using Identity.Persistence.DataBase.Extensions;
 using Identity.Service.EventHandlers.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configurtation = builder.Configuration;
@@ -36,6 +37,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.Services.GetService<ApplicationDbContext>()!.Database.Migrate();
 }
 
 app.UseAuthorization();

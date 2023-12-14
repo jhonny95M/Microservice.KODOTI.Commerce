@@ -49,8 +49,9 @@ async Task MessageHandler(ProcessMessageEventArgs args)
     string body = args.Message.Body.ToString();
     var jwtContent = JsonSerializer.Deserialize<ProductInStockUpdateCommand>(body);
     var jwt = jwtContent!.AccesToken!;
-    HttpClient httpClient = new HttpClient();    
-    string catalogUrl= "http://localhost:20000/";
+    HttpClient httpClient = new HttpClient();
+    //string catalogUrl= "http://localhost:20000/";
+    string catalogUrl = "https://kcm-catalog.azurewebsites.net/";
     var contend = new StringContent(body, Encoding.UTF8, "application/json");
     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",jwt.Replace("Bearer ",""));
     var request = await httpClient.PutAsync(catalogUrl + "api/productInStock", contend);
